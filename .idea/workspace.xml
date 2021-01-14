@@ -12,16 +12,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f14af27-b2df-425c-8c00-67c20b3707ca" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/src/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile-debug" beforeDir="false" afterPath="$PROJECT_DIR$/src/Makefile-debug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sharpen_correct.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/correctBMP/Sharpen_correct.bmp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myfunction.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/myfunction.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readBMP.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/readBMP.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readBMP.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/readBMP.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/showBMP.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/showBMP.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/writeBMP.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/writeBMP.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/writeBMP.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/writeBMP.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,10 +42,20 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/input" />
+      <recent name="$PROJECT_DIR$/correctBMP" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="caEx5" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="caEx5" TARGET_NAME="caEx5" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="caEx5" RUN_TARGET_NAME="caEx5">
@@ -73,7 +77,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1610658265275</updated>
-      <workItem from="1610658266937" duration="303000" />
+      <workItem from="1610658266937" duration="540000" />
+      <workItem from="1610658833266" duration="122000" />
     </task>
     <servers />
   </component>
@@ -90,5 +95,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

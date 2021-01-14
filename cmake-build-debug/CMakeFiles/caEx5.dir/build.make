@@ -77,30 +77,60 @@ include CMakeFiles/caEx5.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/caEx5.dir/flags.make
 
-CMakeFiles/caEx5.dir/main.c.o: CMakeFiles/caEx5.dir/flags.make
-CMakeFiles/caEx5.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eddie/Documents/code/ClionProjects/caEx5/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/caEx5.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/caEx5.dir/main.c.o   -c /home/eddie/Documents/code/ClionProjects/caEx5/main.c
+CMakeFiles/caEx5.dir/src/readBMP.c.o: CMakeFiles/caEx5.dir/flags.make
+CMakeFiles/caEx5.dir/src/readBMP.c.o: ../src/readBMP.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eddie/Documents/code/ClionProjects/caEx5/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/caEx5.dir/src/readBMP.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/caEx5.dir/src/readBMP.c.o   -c /home/eddie/Documents/code/ClionProjects/caEx5/src/readBMP.c
 
-CMakeFiles/caEx5.dir/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/caEx5.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/eddie/Documents/code/ClionProjects/caEx5/main.c > CMakeFiles/caEx5.dir/main.c.i
+CMakeFiles/caEx5.dir/src/readBMP.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/caEx5.dir/src/readBMP.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/eddie/Documents/code/ClionProjects/caEx5/src/readBMP.c > CMakeFiles/caEx5.dir/src/readBMP.c.i
 
-CMakeFiles/caEx5.dir/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/caEx5.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/eddie/Documents/code/ClionProjects/caEx5/main.c -o CMakeFiles/caEx5.dir/main.c.s
+CMakeFiles/caEx5.dir/src/readBMP.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/caEx5.dir/src/readBMP.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/eddie/Documents/code/ClionProjects/caEx5/src/readBMP.c -o CMakeFiles/caEx5.dir/src/readBMP.c.s
+
+CMakeFiles/caEx5.dir/src/writeBMP.c.o: CMakeFiles/caEx5.dir/flags.make
+CMakeFiles/caEx5.dir/src/writeBMP.c.o: ../src/writeBMP.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eddie/Documents/code/ClionProjects/caEx5/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/caEx5.dir/src/writeBMP.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/caEx5.dir/src/writeBMP.c.o   -c /home/eddie/Documents/code/ClionProjects/caEx5/src/writeBMP.c
+
+CMakeFiles/caEx5.dir/src/writeBMP.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/caEx5.dir/src/writeBMP.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/eddie/Documents/code/ClionProjects/caEx5/src/writeBMP.c > CMakeFiles/caEx5.dir/src/writeBMP.c.i
+
+CMakeFiles/caEx5.dir/src/writeBMP.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/caEx5.dir/src/writeBMP.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/eddie/Documents/code/ClionProjects/caEx5/src/writeBMP.c -o CMakeFiles/caEx5.dir/src/writeBMP.c.s
+
+CMakeFiles/caEx5.dir/src/showBMP.c.o: CMakeFiles/caEx5.dir/flags.make
+CMakeFiles/caEx5.dir/src/showBMP.c.o: ../src/showBMP.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eddie/Documents/code/ClionProjects/caEx5/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/caEx5.dir/src/showBMP.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/caEx5.dir/src/showBMP.c.o   -c /home/eddie/Documents/code/ClionProjects/caEx5/src/showBMP.c
+
+CMakeFiles/caEx5.dir/src/showBMP.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/caEx5.dir/src/showBMP.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/eddie/Documents/code/ClionProjects/caEx5/src/showBMP.c > CMakeFiles/caEx5.dir/src/showBMP.c.i
+
+CMakeFiles/caEx5.dir/src/showBMP.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/caEx5.dir/src/showBMP.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/eddie/Documents/code/ClionProjects/caEx5/src/showBMP.c -o CMakeFiles/caEx5.dir/src/showBMP.c.s
 
 # Object files for target caEx5
 caEx5_OBJECTS = \
-"CMakeFiles/caEx5.dir/main.c.o"
+"CMakeFiles/caEx5.dir/src/readBMP.c.o" \
+"CMakeFiles/caEx5.dir/src/writeBMP.c.o" \
+"CMakeFiles/caEx5.dir/src/showBMP.c.o"
 
 # External object files for target caEx5
 caEx5_EXTERNAL_OBJECTS =
 
-caEx5: CMakeFiles/caEx5.dir/main.c.o
+caEx5: CMakeFiles/caEx5.dir/src/readBMP.c.o
+caEx5: CMakeFiles/caEx5.dir/src/writeBMP.c.o
+caEx5: CMakeFiles/caEx5.dir/src/showBMP.c.o
 caEx5: CMakeFiles/caEx5.dir/build.make
 caEx5: CMakeFiles/caEx5.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/eddie/Documents/code/ClionProjects/caEx5/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable caEx5"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/eddie/Documents/code/ClionProjects/caEx5/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable caEx5"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/caEx5.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

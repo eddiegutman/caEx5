@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/caEx5.dir/main.c.o"
+  "CMakeFiles/caEx5.dir/src/readBMP.c.o"
+  "CMakeFiles/caEx5.dir/src/showBMP.c.o"
+  "CMakeFiles/caEx5.dir/src/writeBMP.c.o"
   "caEx5"
   "caEx5.pdb"
 )

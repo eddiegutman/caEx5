@@ -1,1 +1,1 @@
-/usr/bin/cc -g   CMakeFiles/caEx5.dir/main.c.o  -o caEx5 
+/usr/bin/cc -g   CMakeFiles/caEx5.dir/src/readBMP.c.o CMakeFiles/caEx5.dir/src/writeBMP.c.o CMakeFiles/caEx5.dir/src/showBMP.c.o  -o caEx5  -lm -lGL -lGLU -lglut -lX11 -lXmu -lXi 

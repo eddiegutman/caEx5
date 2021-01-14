@@ -143,32 +143,86 @@ caEx5/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/caEx5.dir/build.make CMakeFiles/caEx5.dir/build
 .PHONY : caEx5/fast
 
-main.o: main.c.o
+src/readBMP.o: src/readBMP.c.o
 
-.PHONY : main.o
+.PHONY : src/readBMP.o
 
 # target to build an object file
-main.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/caEx5.dir/build.make CMakeFiles/caEx5.dir/main.c.o
-.PHONY : main.c.o
+src/readBMP.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/caEx5.dir/build.make CMakeFiles/caEx5.dir/src/readBMP.c.o
+.PHONY : src/readBMP.c.o
 
-main.i: main.c.i
+src/readBMP.i: src/readBMP.c.i
 
-.PHONY : main.i
+.PHONY : src/readBMP.i
 
 # target to preprocess a source file
-main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/caEx5.dir/build.make CMakeFiles/caEx5.dir/main.c.i
-.PHONY : main.c.i
+src/readBMP.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/caEx5.dir/build.make CMakeFiles/caEx5.dir/src/readBMP.c.i
+.PHONY : src/readBMP.c.i
 
-main.s: main.c.s
+src/readBMP.s: src/readBMP.c.s
 
-.PHONY : main.s
+.PHONY : src/readBMP.s
 
 # target to generate assembly for a file
-main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/caEx5.dir/build.make CMakeFiles/caEx5.dir/main.c.s
-.PHONY : main.c.s
+src/readBMP.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/caEx5.dir/build.make CMakeFiles/caEx5.dir/src/readBMP.c.s
+.PHONY : src/readBMP.c.s
+
+src/showBMP.o: src/showBMP.c.o
+
+.PHONY : src/showBMP.o
+
+# target to build an object file
+src/showBMP.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/caEx5.dir/build.make CMakeFiles/caEx5.dir/src/showBMP.c.o
+.PHONY : src/showBMP.c.o
+
+src/showBMP.i: src/showBMP.c.i
+
+.PHONY : src/showBMP.i
+
+# target to preprocess a source file
+src/showBMP.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/caEx5.dir/build.make CMakeFiles/caEx5.dir/src/showBMP.c.i
+.PHONY : src/showBMP.c.i
+
+src/showBMP.s: src/showBMP.c.s
+
+.PHONY : src/showBMP.s
+
+# target to generate assembly for a file
+src/showBMP.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/caEx5.dir/build.make CMakeFiles/caEx5.dir/src/showBMP.c.s
+.PHONY : src/showBMP.c.s
+
+src/writeBMP.o: src/writeBMP.c.o
+
+.PHONY : src/writeBMP.o
+
+# target to build an object file
+src/writeBMP.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/caEx5.dir/build.make CMakeFiles/caEx5.dir/src/writeBMP.c.o
+.PHONY : src/writeBMP.c.o
+
+src/writeBMP.i: src/writeBMP.c.i
+
+.PHONY : src/writeBMP.i
+
+# target to preprocess a source file
+src/writeBMP.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/caEx5.dir/build.make CMakeFiles/caEx5.dir/src/writeBMP.c.i
+.PHONY : src/writeBMP.c.i
+
+src/writeBMP.s: src/writeBMP.c.s
+
+.PHONY : src/writeBMP.s
+
+# target to generate assembly for a file
+src/writeBMP.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/caEx5.dir/build.make CMakeFiles/caEx5.dir/src/writeBMP.c.s
+.PHONY : src/writeBMP.c.s
 
 # Help Target
 help:
@@ -179,9 +233,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... caEx5"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... src/readBMP.o"
+	@echo "... src/readBMP.i"
+	@echo "... src/readBMP.s"
+	@echo "... src/showBMP.o"
+	@echo "... src/showBMP.i"
+	@echo "... src/showBMP.s"
+	@echo "... src/writeBMP.o"
+	@echo "... src/writeBMP.i"
+	@echo "... src/writeBMP.s"
 .PHONY : help
 
 

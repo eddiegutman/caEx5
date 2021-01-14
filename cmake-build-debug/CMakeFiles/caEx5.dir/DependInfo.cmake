@@ -4,7 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/eddie/Documents/code/ClionProjects/caEx5/main.c" "/home/eddie/Documents/code/ClionProjects/caEx5/cmake-build-debug/CMakeFiles/caEx5.dir/main.c.o"
+  "/home/eddie/Documents/code/ClionProjects/caEx5/src/readBMP.c" "/home/eddie/Documents/code/ClionProjects/caEx5/cmake-build-debug/CMakeFiles/caEx5.dir/src/readBMP.c.o"
+  "/home/eddie/Documents/code/ClionProjects/caEx5/src/showBMP.c" "/home/eddie/Documents/code/ClionProjects/caEx5/cmake-build-debug/CMakeFiles/caEx5.dir/src/showBMP.c.o"
+  "/home/eddie/Documents/code/ClionProjects/caEx5/src/writeBMP.c" "/home/eddie/Documents/code/ClionProjects/caEx5/cmake-build-debug/CMakeFiles/caEx5.dir/src/writeBMP.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

@@ -76,7 +76,19 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/eddie/Documents/code/ClionProjects/caEx5/main.c">
+		<Unit filename="/home/eddie/Documents/code/ClionProjects/caEx5/src/readBMP.c">
+			<Option target="caEx5"/>
+		</Unit>
+		<Unit filename="/home/eddie/Documents/code/ClionProjects/caEx5/src/readBMP.h">
+			<Option target="caEx5"/>
+		</Unit>
+		<Unit filename="/home/eddie/Documents/code/ClionProjects/caEx5/src/showBMP.c">
+			<Option target="caEx5"/>
+		</Unit>
+		<Unit filename="/home/eddie/Documents/code/ClionProjects/caEx5/src/writeBMP.c">
+			<Option target="caEx5"/>
+		</Unit>
+		<Unit filename="/home/eddie/Documents/code/ClionProjects/caEx5/src/writeBMP.h">
 			<Option target="caEx5"/>
 		</Unit>
 		<Unit filename="/home/eddie/Documents/code/ClionProjects/caEx5/CMakeLists.txt">

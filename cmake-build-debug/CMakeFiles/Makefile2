@@ -94,12 +94,12 @@ clean: CMakeFiles/caEx5.dir/clean
 CMakeFiles/caEx5.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/caEx5.dir/build.make CMakeFiles/caEx5.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/caEx5.dir/build.make CMakeFiles/caEx5.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/eddie/Documents/code/ClionProjects/caEx5/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target caEx5"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/eddie/Documents/code/ClionProjects/caEx5/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4 "Built target caEx5"
 .PHONY : CMakeFiles/caEx5.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/caEx5.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/eddie/Documents/code/ClionProjects/caEx5/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/eddie/Documents/code/ClionProjects/caEx5/cmake-build-debug/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/caEx5.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/eddie/Documents/code/ClionProjects/caEx5/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/caEx5.dir/rule
