@@ -1,246 +1,390 @@
-#include <stdbool.h> 
+// 311432082 Edward Gutman
+#include <stdbool.h>
+
+/**
+ * pixel representation.
+ * consists of three color channels - rgb.
+ */
 
 typedef struct {
-   unsigned char red;
-   unsigned char green;
-   unsigned char blue;
+    unsigned char red;
+    unsigned char green;
+    unsigned char blue;
 } pixel;
 
-typedef struct {
-    int red;
-    int green;
-    int blue;
-    // int num;
-} pixel_sum;
-
-
-/* Compute min and max of two integers, respectively */
-int min(int a, int b) { return (a < b ? a : b); }
-int max(int a, int b) { return (a > b ? a : b); }
-
-int calcIndex(int i, int j, int n) {
-	return ((i)*(n)+(j));
-}
-
-/*
- * initialize_pixel_sum - Initializes all fields of sum to 0
+/**
+ * This function does the smoothing of an image.
+ * For each row in the pixel matrix, we calculate sum of each channel - of a 3x3 window around the first pixel.
+ * (just like smoothing kernel).
+ * Then, as we iterate on the row we update it: by adding the 3 new values from the new column, and subtracting
+ * the 3 old values from the previous column on the window.
+ * By doing so we get the sum of each pixel's channel values, but with a smaller amount of memory accesses.
+ * After that, we divide each channel's sum by the kernel scale and update the destination image with the newly
+ * found sums.
+ *
+ * @param dim the dimension of the image,
+ * @param src source pixel matrix.
+ * @param dst destination pixel matrix.
+ * @param kernelScale a number to scale by the pixels.
  */
-void initialize_pixel_sum(pixel_sum *sum) {
-	sum->red = sum->green = sum->blue = 0;
-	// sum->num = 0;
-	return;
+
+void smooth(int dim, pixel src[m][n], pixel dst[m][n], int kernelScale) {
+    int i, j;
+    int size = dim - 1;
+
+    int rSum = 0, gSum = 0, bSum = 0;
+
+    // iterate over each pixel in the border
+    for (i = 1 ; i < size; i++) {
+        for (j =  1 ; j < size ; j++) {
+
+            // if its the first column, calculate the starting sum of 3x3 window around the current pixel,
+            // for this row.
+            if (j == 1) {
+                // utilization of spatial and temporal locality, and combining few elements over one iteration.
+                rSum = src[i-1][0].red + src[i-1][1].red + src[i-1][2].red +
+                       src[i][0].red + src[i][1].red + src[i][2].red +
+                       src[i+1][0].red + src[i+1][1].red + src[i+1][2].red;
+                gSum = src[i-1][0].green + src[i-1][1].green + src[i-1][2].green +
+                       src[i][0].green + src[i][1].green + src[i][2].green +
+                       src[i+1][0].green + src[i+1][1].green + src[i+1][2].green;
+                bSum = src[i-1][0].blue + src[i-1][1].blue + src[i-1][2].blue +
+                       src[i][0].blue + src[i][1].blue + src[i][2].blue +
+                       src[i+1][0].blue + src[i+1][1].blue + src[i+1][2].blue;
+            } else {
+                // if its not the first column, add and subtract the correct values for the new 3x3 window
+                // also utilization of spatial and temporal locality, and combining few elements over one iteration.
+                rSum = rSum + src[i-1][j+1].red + src[i][j+1].red + src[i+1][j+1].red
+                       - src[i-1][j-2].red - src[i][j-2].red - src[i+1][j-2].red;
+                gSum = gSum + src[i-1][j+1].green + src[i][j+1].green + src[i+1][j+1].green
+                       - src[i-1][j-2].green - src[i][j-2].green - src[i+1][j-2].green;
+                bSum = bSum + src[i-1][j+1].blue + src[i][j+1].blue + src[i+1][j+1].blue
+                       - src[i-1][j-2].blue - src[i][j-2].blue - src[i+1][j-2].blue;
+            }
+
+            // divide each channel's sum by the kernel scale and update the destination image
+            dst[i][j].red = rSum/kernelScale;
+            dst[i][j].green = gSum/kernelScale;
+            dst[i][j].blue = bSum/kernelScale;
+        }
+    }
 }
 
-/*
- * assign_sum_to_pixel - Truncates pixel's new value to match the range [0,255]
+/**
+ * This function does the sharpening of an image.
+ * For each row in the pixel matrix, we calculate sum of each channel - of a 3x3 window around the first pixel,
+ * by adding 9 times the current pixel values and subtracting each of the surround pixel values.
+ * (just like sharpening kernel).
+ * Then, as we iterate on the row we update it: by subtracting the 3 new values from the new column, adding
+ * the 3 old values from the previous column on the window, subtracting 10 times of the current pixel values,
+ * and lasting adding 10 times the previous pixel values.
+ * By doing so we get the sum of each pixel's channel values multiplied by the sharpening kernel,
+ * but with a smaller amount of memory accesses.
+ * After that, we divide each channel's sum by the kernel scale and update the destination image with the newly
+ * found sums.
+ *
+ * @param dim the dimension of the image,
+ * @param src source pixel matrix.
+ * @param dst destination pixel matrix.
+ * @param kernelScale a number to scale by the pixels.
  */
-static void assign_sum_to_pixel(pixel *current_pixel, pixel_sum sum, int kernelScale) {
 
-	// divide by kernel's weight
-	sum.red = sum.red / kernelScale;
-	sum.green = sum.green / kernelScale;
-	sum.blue = sum.blue / kernelScale;
+void sharp(int dim, pixel src[m][n], pixel dst[m][n], int kernelScale) {
+    int i, j, r, g, b;
+    int size = dim - 1;
+    int rSum = 0, gSum = 0, bSum = 0;
 
-	// truncate each pixel's color values to match the range [0,255]
-	current_pixel->red = (unsigned char) (min(max(sum.red, 0), 255));
-	current_pixel->green = (unsigned char) (min(max(sum.green, 0), 255));
-	current_pixel->blue = (unsigned char) (min(max(sum.blue, 0), 255));
-	return;
+    // iterate over each pixel in the border
+    for (i = 1 ; i < size; i++) {
+        for (j =  1 ; j < size ; j++) {
+
+            // if its the first column, calculate the starting sum of 3x3 window around the current pixel,
+            // for this row.
+            if (j == 1) {
+                // utilization of spatial and temporal locality.
+                rSum = -src[i-1][0].red - src[i-1][1].red - src[i-1][2].red -
+                       src[i][0].red + 9*src[i][1].red - src[i][2].red -
+                       src[i+1][0].red - src[i+1][1].red - src[i+1][2].red;
+                gSum = -src[i-1][0].green - src[i-1][1].green - src[i-1][2].green -
+                       src[i][0].green + 9*src[i][1].green - src[i][2].green -
+                       src[i+1][0].green - src[i+1][1].green - src[i+1][2].green;
+                bSum = -src[i-1][0].blue - src[i-1][1].blue - src[i-1][2].blue -
+                       src[i][0].blue + 9*src[i][1].blue - src[i][2].blue -
+                       src[i+1][0].blue - src[i+1][1].blue - src[i+1][2].blue;
+            } else {
+                // if its not the first column, add and subtract the correct values for the new 3x3 window
+                // also utilization of spatial and temporal locality.
+                rSum = rSum - src[i-1][j+1].red - src[i][j+1].red - src[i+1][j+1].red
+                       + src[i-1][j-2].red + src[i][j-2].red + src[i+1][j-2].red +
+                       10*src[i][j].red - 10*src[i][j-1].red;
+                gSum = gSum - src[i-1][j+1].green - src[i][j+1].green - src[i+1][j+1].green
+                       + src[i-1][j-2].green + src[i][j-2].green + src[i+1][j-2].green +
+                       10*src[i][j].green - 10*src[i][j-1].green;
+                bSum = bSum - src[i-1][j+1].blue - src[i][j+1].blue - src[i+1][j+1].blue
+                       + src[i-1][j-2].blue + src[i][j-2].blue + src[i+1][j-2].blue +
+                       10*src[i][j].blue - 10*src[i][j-1].blue;
+            }
+
+            // divide each channel's sum by the kernel scale and update the destination image
+            r = rSum/kernelScale;
+            g = gSum/kernelScale;
+            b = bSum/kernelScale;
+
+            // truncate each pixel channel
+            // avoiding additional functions calling.
+            if (r < 0)
+                r = 0;
+            if (r > 255)
+                r = 255;
+
+            if (g < 0)
+                g = 0;
+            if (g > 255)
+                g = 255;
+
+            if (b < 0)
+                b = 0;
+            if (b > 255)
+                b = 255;
+
+
+            // update the destination image with the new pixel.
+            dst[i][j].red = r;
+            dst[i][j].green = g;
+            dst[i][j].blue = b;
+        }
+    }
 }
 
-/*
-* sum_pixels_by_weight - Sums pixel values, scaled by given weight
-*/
-static void sum_pixels_by_weight(pixel_sum *sum, pixel p, int weight) {
-	sum->red += ((int) p.red) * weight;
-	sum->green += ((int) p.green) * weight;
-	sum->blue += ((int) p.blue) * weight;
-	// sum->num++;
-	return;
-}
-
-/*
- *  Applies kernel for pixel at (i,j)
+/**
+ * This function does the smoothing of an image but with application of a filter.
+ * Similliar to the smoothing function, but with each pixel iteration we search for the min and max
+ * pixel sum values.
+ * Then we remove the min and max pixel values from the the corresponding channels sum, apply the kernel scaling,
+ * and update the destination image.
+ *
+ * @param dim the dimension of the image,
+ * @param src source pixel matrix.
+ * @param dst destination pixel matrix.
+ * @param kernelScale a number to scale by the pixels.
  */
-static pixel applyKernel(int dim, int i, int j, pixel *src, int kernelSize, int kernel[kernelSize][kernelSize], int kernelScale, bool filter) {
 
-	int ii, jj;
-	int currRow, currCol;
-	pixel_sum sum;
-	pixel current_pixel;
-	int min_intensity = 766; // arbitrary value that is higher than maximum possible intensity, which is 255*3=765
-	int max_intensity = -1; // arbitrary value that is lower than minimum possible intensity, which is 0
-	int min_row, min_col, max_row, max_col;
-	pixel loop_pixel;
+void smoothFilter(int dim, pixel src[m][n], pixel dst[m][n], int kernelScale) {
+    int i, j;
+    int size = dim - 1;
+    int maxRow, maxCol, minRow, minCol;
+    int pixelSum;
+    int rSum = 0, gSum = 0, bSum = 0;
 
-	initialize_pixel_sum(&sum);
+    // iterate over each pixel in the border
+    for (i = 1 ; i < size; i++) {
+        for (j =  1 ; j < size ; j++) {
+            int maxIntensity = -1;
+            int minIntensity = 766;
 
-	for(ii = max(i-1, 0); ii <= min(i+1, dim-1); ii++) {
-		for(jj = max(j-1, 0); jj <= min(j+1, dim-1); jj++) {
+            // if its the first column, calculate the starting sum of 3x3 window around the current pixel,
+            // for this row.
+            if (j == 1) {
+                // utilization of spatial and temporal locality, and combining few elements over one iteration.
+                rSum = src[i-1][0].red + src[i-1][1].red + src[i-1][2].red +
+                       src[i][0].red + src[i][1].red + src[i][2].red +
+                       src[i+1][0].red + src[i+1][1].red + src[i+1][2].red;
+                gSum = src[i-1][0].green + src[i-1][1].green + src[i-1][2].green +
+                       src[i][0].green + src[i][1].green + src[i][2].green +
+                       src[i+1][0].green + src[i+1][1].green + src[i+1][2].green;
+                bSum = src[i-1][0].blue + src[i-1][1].blue + src[i-1][2].blue +
+                       src[i][0].blue + src[i][1].blue + src[i][2].blue +
+                       src[i+1][0].blue + src[i+1][1].blue + src[i+1][2].blue;
+            } else {
+                // if its not the first column, add and subtract the correct values for the new 3x3 window
+                // utilization of spatial and temporal locality, and combining few elements over one iteration.
+                rSum = rSum + src[i-1][j+1].red + src[i][j+1].red + src[i+1][j+1].red
+                       - src[i-1][j-2].red - src[i][j-2].red - src[i+1][j-2].red;
+                gSum = gSum + src[i-1][j+1].green + src[i][j+1].green + src[i+1][j+1].green
+                       - src[i-1][j-2].green - src[i][j-2].green - src[i+1][j-2].green;
+                bSum = bSum + src[i-1][j+1].blue + src[i][j+1].blue + src[i+1][j+1].blue
+                       - src[i-1][j-2].blue - src[i][j-2].blue - src[i+1][j-2].blue;
+            }
 
-			int kRow, kCol;
 
-			// compute row index in kernel
-			if (ii < i) {
-				kRow = 0;
-			} else if (ii > i) {
-				kRow = 2;
-			} else {
-				kRow = 1;
-			}
+            // search for the min and max pixel channels' sum, in a 3x3 window around the current pixel.
+            // utilization of spatial and temporal locality, and avoiding more nested for loops.
+            pixelSum = src[i-1][j-1].red + src[i-1][j-1].green + src[i-1][j-1].blue;
+            if (pixelSum > maxIntensity) {
+                maxIntensity = pixelSum;
+                maxRow = i-1;
+                maxCol = j-1;
+            }
+            if (pixelSum <= minIntensity) {
+                minIntensity = pixelSum;
+                minRow = i-1;
+                minCol = j-1;
+            }
 
-			// compute column index in kernel
-			if (jj < j) {
-				kCol = 0;
-			} else if (jj > j) {
-				kCol = 2;
-			} else {
-				kCol = 1;
-			}
+            pixelSum = src[i-1][j].red + src[i-1][j].green + src[i-1][j].blue;
+            if (pixelSum > maxIntensity) {
+                maxIntensity = pixelSum;
+                maxRow = i-1;
+                maxCol = j;
+            }
+            if (pixelSum <= minIntensity) {
+                minIntensity = pixelSum;
+                minRow = i-1;
+                minCol = j;
+            }
 
-			// apply kernel on pixel at [ii,jj]
-			sum_pixels_by_weight(&sum, src[calcIndex(ii, jj, dim)], kernel[kRow][kCol]);
-		}
-	}
+            pixelSum = src[i-1][j+1].red + src[i-1][j+1].green + src[i-1][j+1].blue;
+            if (pixelSum > maxIntensity) {
+                maxIntensity = pixelSum;
+                maxRow = i-1;
+                maxCol = j+1;
+            }
+            if (pixelSum <= minIntensity) {
+                minIntensity = pixelSum;
+                minRow = i-1;
+                minCol = j+1;
+            }
 
-	if (filter) {
-		// find min and max coordinates
-		for(ii = max(i-1, 0); ii <= min(i+1, dim-1); ii++) {
-			for(jj = max(j-1, 0); jj <= min(j+1, dim-1); jj++) {
-				// check if smaller than min or higher than max and update
-				loop_pixel = src[calcIndex(ii, jj, dim)];
-				if ((((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue)) <= min_intensity) {
-					min_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
-					min_row = ii;
-					min_col = jj;
-				}
-				if ((((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue)) > max_intensity) {
-					max_intensity = (((int) loop_pixel.red) + ((int) loop_pixel.green) + ((int) loop_pixel.blue));
-					max_row = ii;
-					max_col = jj;
-				}
-			}
-		}
-		// filter out min and max
-		sum_pixels_by_weight(&sum, src[calcIndex(min_row, min_col, dim)], -1);
-		sum_pixels_by_weight(&sum, src[calcIndex(max_row, max_col, dim)], -1);
-	}
+            pixelSum = src[i][j-1].red + src[i][j-1].green + src[i][j-1].blue;
+            if (pixelSum > maxIntensity) {
+                maxIntensity = pixelSum;
+                maxRow = i;
+                maxCol = j-1;
+            }
+            if (pixelSum <= minIntensity) {
+                minIntensity = pixelSum;
+                minRow = i;
+                minCol = j-1;
+            }
 
-	// assign kernel's result to pixel at [i,j]
-	assign_sum_to_pixel(&current_pixel, sum, kernelScale);
-	return current_pixel;
+            pixelSum = src[i][j].red + src[i][j].green + src[i][j].blue;
+            if (pixelSum > maxIntensity) {
+                maxIntensity = pixelSum;
+                maxRow = i;
+                maxCol = j;
+            }
+            if (pixelSum <= minIntensity) {
+                minIntensity = pixelSum;
+                minRow = i;
+                minCol = j;
+            }
+            pixelSum = src[i][j+1].red + src[i][j+1].green + src[i][j+1].blue;
+            if (pixelSum > maxIntensity) {
+                maxIntensity = pixelSum;
+                maxRow = i;
+                maxCol = j+1;
+            }
+            if (pixelSum <= minIntensity) {
+                minIntensity = pixelSum;
+                minRow = i;
+                minCol = j+1;
+            }
+            pixelSum = src[i+1][j-1].red + src[i+1][j-1].green + src[i+1][j-1].blue;
+            if (pixelSum > maxIntensity) {
+                maxIntensity = pixelSum;
+                maxRow = i+1;
+                maxCol = j-1;
+            }
+            if (pixelSum <= minIntensity) {
+                minIntensity = pixelSum;
+                minRow = i+1;
+                minCol = j-1;
+            }
+            pixelSum = src[i+1][j].red + src[i+1][j].green + src[i+1][j].blue;
+            if (pixelSum > maxIntensity) {
+                maxIntensity = pixelSum;
+                maxRow = i+1;
+                maxCol = j;
+            }
+            if (pixelSum <= minIntensity) {
+                minIntensity = pixelSum;
+                minRow = i+1;
+                minCol = j;
+            }
+            pixelSum = src[i+1][j+1].red + src[i+1][j+1].green + src[i+1][j+1].blue;
+            if (pixelSum > maxIntensity) {
+                maxIntensity = pixelSum;
+                maxRow = i+1;
+                maxCol = j+1;
+            }
+            if (pixelSum <= minIntensity) {
+                minIntensity = pixelSum;
+                minRow = i+1;
+                minCol = j+1;
+            }
+
+            // subtract the min and max pixel value from the the corresponding channel's sum.
+            rSum = rSum - src[maxRow][maxCol].red - src[minRow][minCol].red;
+            gSum = gSum - src[maxRow][maxCol].green - src[minRow][minCol].green;
+            bSum = bSum - src[maxRow][maxCol].blue - src[minRow][minCol].blue;
+
+            // divide each channel's sum by the kernel scale and update the destination image
+            dst[i][j].red = rSum/kernelScale;
+            dst[i][j].green = gSum/kernelScale;
+            dst[i][j].blue = bSum/kernelScale;
+
+            // add back the subtracted values from above (we use a continues sum across the row)
+            rSum = rSum + src[maxRow][maxCol].red + src[minRow][minCol].red;
+            gSum = gSum + src[maxRow][maxCol].green + src[minRow][minCol].green;
+            bSum = bSum + src[maxRow][maxCol].blue + src[minRow][minCol].blue;
+
+        }
+    }
 }
 
-/*
-* Apply the kernel over each pixel.
-* Ignore pixels where the kernel exceeds bounds. These are pixels with row index smaller than kernelSize/2 and/or
-* column index smaller than kernelSize/2
-*/
-void smooth(int dim, pixel *src, pixel *dst, int kernelSize, int kernel[kernelSize][kernelSize], int kernelScale, bool filter) {
 
-	int i, j;
-	for (i = kernelSize / 2 ; i < dim - kernelSize / 2; i++) {
-		for (j =  kernelSize / 2 ; j < dim - kernelSize / 2 ; j++) {
-			dst[calcIndex(i, j, dim)] = applyKernel(dim, i, j, src, kernelSize, kernel, kernelScale, filter);
-		}
-	}
+void doConvolution(Image *img, int option, int kernelScale) {
+    int size = m*n*3;
+
+    // create two pixel matrices
+    pixel pixelsImg[m][n];
+    pixel copy[m][n];
+
+    // copy the source image to both matrices.
+    memcpy(pixelsImg, img->data, size);
+    memcpy(copy, pixelsImg, size);
+
+    // call the correct convolution according to the given option.
+    if (option == 1)
+        smooth(m, pixelsImg, copy, kernelScale);
+
+    if (option == 2)
+        sharp(m, pixelsImg, copy, kernelScale);
+
+    if (option == 3)
+        smoothFilter(m, pixelsImg, copy, kernelScale);
+
+    // copy the finished pixel matrix to the destination image,
+    memcpy(copy, pixelsImg, size);
+
 }
 
-void charsToPixels(Image *charsImg, pixel* pixels) {
+void myfunction(Image *img, char* srcImgpName, char* blurRsltImgName, char* sharpRsltImgName, char* filteredBlurRsltImgName, char* filteredSharpRsltImgName, char flag) {
+    int smooth = 1, sharp = 2, smoothFilter = 3;
 
-	int row, col;
-	for (row = 0 ; row < m ; row++) {
-		for (col = 0 ; col < n ; col++) {
+    if (flag == '1') {
+        // blur image
+        doConvolution(img, smooth, 9);
 
-			pixels[row*n + col].red = image->data[3*row*n + 3*col];
-			pixels[row*n + col].green = image->data[3*row*n + 3*col + 1];
-			pixels[row*n + col].blue = image->data[3*row*n + 3*col + 2];
-		}
-	}
+        // write result image to file
+        writeBMP(img, srcImgpName, blurRsltImgName);
+
+        // sharpen the resulting image
+        doConvolution(img, sharp, 1);
+
+        // write result image to file
+        writeBMP(img, srcImgpName, sharpRsltImgName);
+    } else {
+        // apply extermum filtered kernel to blur image
+        doConvolution(img, smoothFilter, 7);
+
+        // write result image to file
+        writeBMP(img, srcImgpName, filteredBlurRsltImgName);
+
+        // sharpen the resulting image
+        doConvolution(img, sharp, 1);
+
+        // write result image to file
+        writeBMP(img, srcImgpName, filteredSharpRsltImgName);
+    }
 }
-
-void pixelsToChars(pixel* pixels, Image *charsImg) {
-
-	int row, col;
-	for (row = 0 ; row < m ; row++) {
-		for (col = 0 ; col < n ; col++) {
-
-			image->data[3*row*n + 3*col] = pixels[row*n + col].red;
-			image->data[3*row*n + 3*col + 1] = pixels[row*n + col].green;
-			image->data[3*row*n + 3*col + 2] = pixels[row*n + col].blue;
-		}
-	}
-}
-
-void copyPixels(pixel* src, pixel* dst) {
-
-	int row, col;
-	for (row = 0 ; row < m ; row++) {
-		for (col = 0 ; col < n ; col++) {
-
-			dst[row*n + col].red = src[row*n + col].red;
-			dst[row*n + col].green = src[row*n + col].green;
-			dst[row*n + col].blue = src[row*n + col].blue;
-		}
-	}
-}
-
-void doConvolution(Image *image, int kernelSize, int kernel[kernelSize][kernelSize], int kernelScale, bool filter) {
-
-	pixel* pixelsImg = malloc(m*n*sizeof(pixel));
-	pixel* backupOrg = malloc(m*n*sizeof(pixel));
-
-	charsToPixels(image, pixelsImg);
-	copyPixels(pixelsImg, backupOrg);
-
-	smooth(m, backupOrg, pixelsImg, kernelSize, kernel, kernelScale, filter);
-
-	pixelsToChars(pixelsImg, image);
-
-	free(pixelsImg);
-	free(backupOrg);
-}
-
-void myfunction(Image *image, char* srcImgpName, char* blurRsltImgName, char* sharpRsltImgName, char* filteredBlurRsltImgName, char* filteredSharpRsltImgName, char flag) {
-
-	/*
-	* [1, 1, 1]
-	* [1, 1, 1]
-	* [1, 1, 1]
-	*/
-	int blurKernel[3][3] = {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}};
-
-	/*
-	* [-1, -1, -1]
-	* [-1, 9, -1]
-	* [-1, -1, -1]
-	*/
-	int sharpKernel[3][3] = {{-1,-1,-1},{-1,9,-1},{-1,-1,-1}};
-
-	if (flag == '1') {	
-		// blur image
-		doConvolution(image, 3, blurKernel, 9, false);
-
-		// write result image to file
-		writeBMP(image, srcImgpName, blurRsltImgName);	
-
-		// sharpen the resulting image
-		doConvolution(image, 3, sharpKernel, 1, false);
-		
-		// write result image to file
-		writeBMP(image, srcImgpName, sharpRsltImgName);	
-	} else {
-		// apply extermum filtered kernel to blur image
-		doConvolution(image, 3, blurKernel, 7, true);
-
-		// write result image to file
-		writeBMP(image, srcImgpName, filteredBlurRsltImgName);
-
-		// sharpen the resulting image
-		doConvolution(image, 3, sharpKernel, 1, false);
-
-		// write result image to file
-		writeBMP(image, srcImgpName, filteredSharpRsltImgName);	
-	}
-}
-

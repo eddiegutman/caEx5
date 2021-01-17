@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
       <config projectName="caEx5" targetName="caEx5" />
@@ -12,10 +15,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f14af27-b2df-425c-8c00-67c20b3707ca" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/caEx5.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.17.3/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.17.3/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.17.3/CompilerIdC/a.out" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.17.3/CompilerIdC/a.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/caEx5.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/caEx5.dir/depend.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/correctBMP/Blur_correct.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/bmp/Blur_correct.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/correctBMP/Filtered_Blur_correct.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/bmp/Filtered_Blur_correct.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/correctBMP/Filtered_Sharpen_correct.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/bmp/Filtered_Sharpen_correct.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/correctBMP/Sharpen_correct.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/bmp/Sharpen_correct.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/gibson_500.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/bmp/gibson_500.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myfunction.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/myfunction.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,28 +54,27 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="dynamic.analysis.tools.profiler" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/input" />
+      <recent name="$PROJECT_DIR$/bmp" />
       <recent name="$PROJECT_DIR$/correctBMP" />
+      <recent name="$PROJECT_DIR$/input" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="caEx5" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="caEx5" TARGET_NAME="caEx5" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="caEx5" RUN_TARGET_NAME="caEx5">
+    <configuration name="caEx5" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="gibson_500.bmp 1" REDIRECT_INPUT="false" ELEVATE="false" WORKING_DIR="file://$PROJECT_DIR$/bmp" PASS_PARENT_ENVS_2="true" PROJECT_NAME="caEx5" TARGET_NAME="caEx5" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="caEx5" RUN_TARGET_NAME="caEx5">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -79,6 +95,11 @@
       <updated>1610658265275</updated>
       <workItem from="1610658266937" duration="540000" />
       <workItem from="1610658833266" duration="122000" />
+      <workItem from="1610659882040" duration="1510000" />
+      <workItem from="1610826936121" duration="27000" />
+      <workItem from="1610827121026" duration="25383000" />
+      <workItem from="1610878738759" duration="4062000" />
+      <workItem from="1610883256233" duration="22508000" />
     </task>
     <servers />
   </component>

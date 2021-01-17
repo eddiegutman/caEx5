@@ -6,8 +6,7 @@
       <file path="$PROJECT_DIR$/src" />
     </sourceRoots>
     <excludeRoots>
-      <file path="$PROJECT_DIR$/correctBMP" />
-      <file path="$PROJECT_DIR$/input" />
+      <file path="$PROJECT_DIR$/bmp" />
       <file path="$PROJECT_DIR$/out" />
     </excludeRoots>
   </component>
