@@ -1,4 +1,5 @@
 // 311432082 Edward Gutman
+// tests used by Ron Even
 #include <stdbool.h>
 
 /**
@@ -355,8 +356,7 @@ void doConvolution(Image *img, int option, int kernelScale) {
         smoothFilter(m, pixelsImg, copy, kernelScale);
 
     // copy the finished pixel matrix to the destination image,
-    memcpy(copy, pixelsImg, size);
-
+    memcpy(img->data, copy, size);
 }
 
 void myfunction(Image *img, char* srcImgpName, char* blurRsltImgName, char* sharpRsltImgName, char* filteredBlurRsltImgName, char* filteredSharpRsltImgName, char flag) {
